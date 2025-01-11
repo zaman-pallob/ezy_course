@@ -1,4 +1,4 @@
 class AppImages {
-  static const basePath = "assets/images/";
-  static const loginBackground = "${basePath}login_background.png";
+  static const _basePath = "assets/images/";
+  static const loginBackground = "${_basePath}login_background.svg";
 }
