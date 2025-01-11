@@ -1,4 +1,4 @@
-import 'package:ezy_course/app_components/app_colors.dart';
+import 'package:ezy_course/common/custom_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -12,8 +12,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.white,
-    );
+    return Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(),
+        bottomNavigationBar: CustomBottomNavigation(
+          onTap: (int index) {},
+        ));
   }
 }

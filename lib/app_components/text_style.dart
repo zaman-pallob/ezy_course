@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+var font12 = TextStyle(
+  fontFamily: 'Figtree',
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+);
+
 var font14 = TextStyle(
   fontFamily: 'Figtree',
   fontSize: 14.sp,
