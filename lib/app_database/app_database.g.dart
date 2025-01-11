@@ -14,6 +14,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 }
 
 class $AppDatabaseManager {
-  final _$AppDatabase _db;
-  $AppDatabaseManager(this._db);
+  final _$AppDatabase db;
+  $AppDatabaseManager(this.db);
 }

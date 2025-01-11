@@ -1,3 +1,4 @@
+import 'package:ezy_course/app_database/app_database.dart';
 import 'package:ezy_course/custom_router.dart';
 import 'package:ezy_course/view/auth/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_components/app_colors.dart';
 
+late AppDatabase db;
 void main() {
+  db = AppDatabase();
   runApp(const MyApp());
 }
 
