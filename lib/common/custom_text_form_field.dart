@@ -13,7 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool isDigit;
   final String hintText;
   final bool isPassword;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -36,7 +36,7 @@ class CustomTextFormField extends StatefulWidget {
     this.fillColor = AppColors.white10,
     this.isFilled = true,
     required this.hintText,
-    this.controller,
+    required this.controller,
     this.validator,
     this.isPassword = false,
     this.prefixIcon,
@@ -71,7 +71,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: widget.controller!,
+      valueListenable: widget.controller,
       builder: (context, TextEditingValue value, __) {
         return ConstrainedBox(
           constraints: BoxConstraints(minHeight: 50.h),
@@ -87,6 +87,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             maxLines: widget.number,
             minLines: widget.number,
             keyboardType: widget.textInputType,
+            autocorrect: false,
+            enableSuggestions: false,
             textInputAction: widget.textInputAction,
             enabled: widget.isEnabled,
             onChanged: widget.onChanged,

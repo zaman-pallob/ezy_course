@@ -1,6 +1,9 @@
 import 'package:ezy_course/app_database/app_database.dart';
 import 'package:ezy_course/custom_router.dart';
+import 'package:ezy_course/network/client.dart';
+import 'package:ezy_course/utils/local_storage.dart';
 import 'package:ezy_course/view/auth/login_screen.dart';
+import 'package:ezy_course/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_components/app_colors.dart';
 
 late AppDatabase db;
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.initialize();
+  await Client.initializeDio();
   db = AppDatabase();
   runApp(const MyApp());
 }
@@ -41,7 +47,9 @@ class MyApp extends StatelessWidget {
                     statusBarIconBrightness: Brightness.light),
               ),
             ),
-            initialRoute: LoginScreen.route,
+            initialRoute: LocalStorage.getAccessToken() == ""
+                ? LoginScreen.route
+                : Home.route,
             onGenerateRoute: CustomRouter.onGenerateRoute,
           );
         });

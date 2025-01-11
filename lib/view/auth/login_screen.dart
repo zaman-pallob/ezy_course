@@ -1,14 +1,20 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ezy_course/app_components/app_colors.dart';
 import 'package:ezy_course/app_components/app_images.dart';
 import 'package:ezy_course/app_components/text_style.dart';
 import 'package:ezy_course/common/custom_button.dart';
 import 'package:ezy_course/common/custom_text_form_field.dart';
+import 'package:ezy_course/utils/local_storage.dart';
 import 'package:ezy_course/utils/validators.dart';
 import 'package:ezy_course/view/auth/components/remember_checkbox.dart';
+import 'package:ezy_course/view/home/home.dart';
+import 'package:ezy_course/viewmodel/auth/login_viewmodel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,10 +24,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var emailController = TextEditingController(text: LocalStorage.getEmail());
+  var passwordController =
+      TextEditingController(text: LocalStorage.getPassword());
   var formKey = GlobalKey<FormState>();
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,14 +106,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   SizedBox(height: 30.h),
-                  CustomButton(
-                    loading: false,
-                    height: 60.h,
-                    buttonColor: AppColors.yellow,
-                    textColor: AppColors.primaryDark,
-                    onPressed: () {},
-                    buttonText: "Login",
-                  )
+                  Consumer<LoginViewmodel>(
+                      builder: (context, viewmodel, child) => CustomButton(
+                            loading: viewmodel.isLoading,
+                            height: 60.h,
+                            buttonColor: AppColors.yellow,
+                            textColor: AppColors.primaryDark,
+                            onPressed: () async {
+                              if (formKey.currentState?.validate() ?? false) {
+                                var result = await viewmodel.submit(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  isChecked: isChecked,
+                                );
+                                if (result) {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    Home.route,
+                                  );
+                                }
+                              }
+                            },
+                            buttonText: "Login",
+                          ))
                 ],
               ),
             ),

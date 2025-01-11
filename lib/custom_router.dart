@@ -1,6 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:ezy_course/repository/auth_repo.dart';
 import 'package:ezy_course/view/auth/login_screen.dart';
 import 'package:ezy_course/viewmodel/auth/login_viewmodel.dart';
+import 'package:ezy_course/view/home/home.dart';
+import 'package:ezy_course/viewmodel/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +17,13 @@ class CustomRouter {
             ChangeNotifierProvider(
               create: (context) => LoginViewmodel(AuthRepo()),
               child: const LoginScreen(),
+            ),
+            time: 0);
+      case Home.route:
+        return routeBuilder(
+            ChangeNotifierProvider(
+              create: (context) => HomeViewmodel(),
+              child: const Home(),
             ),
             time: 0);
       default:

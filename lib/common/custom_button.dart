@@ -67,7 +67,7 @@ class CustomButton extends StatelessWidget {
           )
         : MaterialButton(
             elevation: 0,
-            height: 50.h,
+            height: height ?? 50.h,
             minWidth: width ?? MediaQuery.of(context).size.width,
             onPressed: () {},
             color: borderColor != null ? buttonColor : AppColors.borderColor,

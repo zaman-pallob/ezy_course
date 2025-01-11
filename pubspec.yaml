@@ -46,6 +46,9 @@ dependencies:
   sqflite: ^2.4.1
   flutter_svg: ^2.0.17
   flutter_screenutil: ^5.9.3
+  logger: ^2.5.0
+  connectivity_plus: ^6.1.1
+  fluttertoast: ^8.2.10
 
 dev_dependencies:
   flutter_test:
